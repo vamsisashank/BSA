@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "AAOC",
+    "slug": "AAOC",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icons/aaoc_icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/icons/aaoc_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/ic_launcher.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
