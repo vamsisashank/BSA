@@ -15,7 +15,7 @@ export default function AllatoonaPage() {
             tabBarStyle: { position: 'absolute', showLabel: false },
             headerShown: false
         }}>
-            <Tab.Screen name="Home" children={() => <CampHomeScreen />} options={{
+            <Tab.Screen name="Home" children={() => <CampHomeScreen campName={CAMPNAMES.allatoona} />} options={{
                 tabBarIcon: ({ color, size }) => (
                     <FontAwesome name="home" size={32} color="black" />
                 ),

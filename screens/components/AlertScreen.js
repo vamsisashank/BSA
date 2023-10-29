@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { apiKEY, baseUrl } from '../../constants/apiVals';
 
 const AlertScreen = ({ campName }) => {
     const [alerts, setAlerts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const getAlertsRequest = () => {
         return fetch(`${baseUrl}/alerts`, {
+            method: 'GET',
             headers: {
                 'x-api-key': apiKEY
             }
@@ -16,9 +18,11 @@ const AlertScreen = ({ campName }) => {
             .then(json => {
                 const filteredAlerts = json.filter(a => a.location === campName);
                 setAlerts(filteredAlerts);
+                setLoading(false);
             })
             .catch(error => {
                 console.error(error);
+                setLoading(false);
             });
     };
 
@@ -28,22 +32,31 @@ const AlertScreen = ({ campName }) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', maxHeight: 700 }}>
-                <View style={AlertStyles.container}>
-                    {alerts.map(a => (
-                        (<View key={a.id} style={AlertStyles.card} backgroundColor={AlertStyles.cardRed.color}>
-                            <View style={{ justifyContent: 'center', margin: 10 }}>
-                                {a.type === 'Severe' ? <FontAwesome name="times-circle" size={32} color={AlertStyles.cardRed.iconColor} /> :
-                                    (a.type === 'Amber' ? <FontAwesome name="exclamation-triangle" size={32} color={AlertStyles.cardAmber.iconColor} /> :
-                                        <FontAwesome name="info-circle" size={32} color={AlertStyles.cardBlue.iconColor} />)}
+            {
+                loading ?
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <ActivityIndicator size="large" />
+                    </View>
+                    :
+                    <>
+                        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', maxHeight: 700 }}>
+                            <View style={AlertStyles.container}>
+                                {alerts.map(a => (
+                                    (<View key={a.id} style={AlertStyles.card} backgroundColor={AlertStyles.cardRed.color}>
+                                        <View style={{ justifyContent: 'center', margin: 10 }}>
+                                            {a.type === 'Severe' ? <FontAwesome name="times-circle" size={32} color={AlertStyles.cardRed.iconColor} /> :
+                                                (a.type === 'Amber' ? <FontAwesome name="exclamation-triangle" size={32} color={AlertStyles.cardAmber.iconColor} /> :
+                                                    <FontAwesome name="info-circle" size={32} color={AlertStyles.cardBlue.iconColor} />)}
+                                        </View>
+                                        <View style={{ justifyContent: 'center', flex: 1 }}>
+                                            <Text style={{ color: "black" }}>{a.description}</Text>
+                                        </View>
+                                    </View>)
+                                ))}
                             </View>
-                            <View style={{ justifyContent: 'center', flex: 1 }}>
-                                <Text style={{ color: "black" }}>{a.description}</Text>
-                            </View>
-                        </View>)
-                    ))}
-                </View>
-            </ScrollView>
+                        </ScrollView>
+                    </>
+            }
         </View>
     );
 };
