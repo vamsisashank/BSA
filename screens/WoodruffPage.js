@@ -14,7 +14,7 @@ export default function WoodruffPage() {
             tabBarStyle: { position: 'absolute', showLabel: false },
             headerShown: false
         }}>
-            <Tab.Screen name="Home" children={() => <CampHomeScreen />} options={{
+            <Tab.Screen name="Home" children={() => <CampHomeScreen campName={CAMPNAMES.woodruff} />} options={{
                 tabBarIcon: ({ color, size }) => (
                     <FontAwesome name="home" size={32} color="black" />
                 ),

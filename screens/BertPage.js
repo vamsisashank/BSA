@@ -349,7 +349,7 @@ export default function BertPage() {
       tabBarStyle: { position: 'absolute', showLabel: false },
       headerShown: false
     }}>
-      <Tab.Screen name="Home" component={HomeScreen} options={{
+      <Tab.Screen name="Home" children={() => <CampHomeScreen campName={CAMPNAMES.bert} slideImages={slideImages} />} options={{
         tabBarIcon: ({ color, size }) => (
           <FontAwesome name="home" size={32} color="black" />
         ),
