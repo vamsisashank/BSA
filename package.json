@@ -20,7 +20,7 @@
     "moment": "^2.24.0",
     "react": "18.1.0",
     "react-hook-form": "~7.37.0",
-    "react-native": "0.70.8",
+    "react-native": "0.70.14",
     "react-native-big-calendar": "3.2.3",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-image-pan-zoom": "^2.1.12",
